@@ -1,0 +1,56 @@
+@import "../../../assets/colors/colors";
+@import "../../../assets/mixins/mixins";
+
+.home {
+    .top {
+        display: flex;
+        @include laptop-sm{
+            justify-content: space-between;
+        }
+        @include tablet {
+            flex-direction: column;
+        }
+    }
+    .about {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        @include laptop-sm{
+            width: 430px;
+        }
+        @include tablet {
+            width: 100%;
+        }
+        .welcome {
+            color: $gray;
+            font-size: 26px;
+        }
+        .title {
+            color: $white;
+            font-size: 45px;
+            font-weight: 700;
+            margin: 0;
+        }
+        .summary {
+            color: $white;
+            margin: 20px 0;
+        }
+        .buttons {
+            display: flex;
+            align-items: center;
+            ::ng-deep {
+                &:nth-child(1) {
+                    .button {
+                        margin-right: 20px;
+                    }
+                }
+                &:nth-child(2) {
+                    .button{
+                        border-color: $white;
+                    }
+                    
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,14 @@
+$laptop-sm: 1100px;
+$tablet: 991px;
+
+@mixin laptop-sm {
+    @media screen and (max-width: #{$laptop-sm}) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media screen and (max-width: #{$tablet}) {
+        @content;
+    }
+}
