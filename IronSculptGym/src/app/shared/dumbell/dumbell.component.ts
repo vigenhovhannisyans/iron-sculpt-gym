@@ -1,21 +1,22 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, effect, inject } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild, effect, inject } from '@angular/core';
 import { GLTF, GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import * as Three from 'three';
-import { ThreeOptions } from '../../Three/three';
-import { WindowService } from '../../core/window/window.service';
+
+import { WindowService } from '../../core/services/window/window.service';
 import { ThreeService } from '../../core/three/three.service';
+import { dimensions } from '../../core/constants/dimensions';
+import { getWindowSizes } from '../../core/helpers/get-window-size';
 
 @Component({
   selector: 'app-dumbell',
   standalone: true,
   imports: [],
-  templateUrl: './dumbell.component.html',
-  styleUrl: './dumbell.component.scss'
+  template: `<canvas #dumbell></canvas>`,
 })
-export class DumbellComponent implements AfterViewInit, OnInit {
+export class DumbellComponent implements AfterViewInit {
   @ViewChild('dumbell')
   public canvas!: ElementRef;
+
   public width: number = 600;
   public height: number = 500;
 
@@ -24,37 +25,13 @@ export class DumbellComponent implements AfterViewInit, OnInit {
 
   constructor() {
     effect(() => {
-      if (this.windowService.laptop()) {
-        this.threeService.width.set(500);
-        this.threeService.height.set(387);
-        this.createContent(this.canvas.nativeElement)
-      } else if (this.windowService.mobile()) {
-        this.threeService.width.set(600);
-        this.threeService.height.set(500);
-        this.createContent(this.canvas.nativeElement)
-      } else if (this.windowService.mobileSM()) {
-        this.threeService.width.set(500);
-        this.threeService.height.set(350);
-        this.createContent(this.canvas.nativeElement)
-      } else if (this.windowService.mobileXS()) {
-        this.threeService.width.set(480);
-        this.threeService.height.set(430);
-        this.createContent(this.canvas.nativeElement)
-      } else if (this.windowService.mobileS()) {
-        console.log('aa');
-        this.threeService.width.set(350);
-        this.threeService.height.set(300);
-        this.createContent(this.canvas.nativeElement)
-      } else {
-        this.threeService.width.set(600);
-        this.threeService.height.set(500);
-        this.createContent(this.canvas.nativeElement)
-      }
-    }, {allowSignalWrites: true})
-  }
+      const size = getWindowSizes(this.windowService);
+      const { width, height } = dimensions[size];
+      this.threeService.width.set(width);
+      this.threeService.height.set(height);
+      this.createContent(this.canvas.nativeElement)
 
-  public ngOnInit(): void {
-  
+    }, { allowSignalWrites: true })
   }
 
   public ngAfterViewInit(): void {

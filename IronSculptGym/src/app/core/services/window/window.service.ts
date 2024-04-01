@@ -14,17 +14,24 @@ export class WindowService {
 
   constructor() {
     fromEvent(window, 'resize')
-      .pipe(takeUntilDestroyed())
+      .pipe(
+        takeUntilDestroyed(),
+      )
       .subscribe({
         next: (event: Event) => {
           const evt = (event.target as Window);
-          console.log(evt.innerWidth)
-          this.laptop.set(evt.innerWidth <= 1100 && evt.innerWidth >= 992);
-          this.mobile.set(evt.innerWidth <= 991 && evt.innerWidth >= 768);
-          this.mobileSM.set(evt.innerWidth <= 767 && evt.innerWidth >= 575);
-          this.mobileXS.set(evt.innerWidth <= 575 && evt.innerWidth >= 493);
-          this.mobileS.set(evt.innerWidth <= 493 && evt.innerWidth >= 320 );
+          this.handleWindowSize(evt)
         }
-      })
+      });
+      this.handleWindowSize(window)
+  }
+
+  private handleWindowSize(target: Window): void {
+    const evt = target || Window
+    this.laptop.set(evt.innerWidth <= 1100 && evt.innerWidth >= 992);
+    this.mobile.set(evt.innerWidth <= 991 && evt.innerWidth >= 768);
+    this.mobileSM.set(evt.innerWidth <= 767 && evt.innerWidth >= 575);
+    this.mobileXS.set(evt.innerWidth <= 575 && evt.innerWidth >= 493);
+    this.mobileS.set(evt.innerWidth <= 493 && evt.innerWidth >= 320);
   }
 }

@@ -1,0 +1,22 @@
+<div class="header container">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="#">
+      <app-image [className]="'logo'" [name]="'logo.svg'" />
+    </a>
+    <button (click)="handleNavbarToggle()" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icons"></span>
+      <span class="navbar-toggler-icons"></span>
+      <span class="navbar-toggler-icons"></span>
+      <span class="navbar-toggler-icons"></span>
+    </button>
+    <div [class.show]="showNavbar" class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div (click)="handleNavbarToggle()" class="navbar-nav">
+        @for (router of routers; track router.id) {
+        <a class="nav-item nav-link" [routerLink]="router.path" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+          href="#">{{router.title}} <span class="line"></span></a>
+        }
+      </div>
+    </div>
+  </nav>
+</div>

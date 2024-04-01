@@ -1,16 +1,56 @@
 <div class="home container">
     <div class="top">
         <div class="model">
-            <app-dumbell/>
+            <app-dumbell />
         </div>
         <div class="about">
             <span class="welcome">Welcome!</span>
-            <h1 class="title">IronSculpt</h1>
-            <p class="summary">"Welcome to Our Gym: Where Your Fitness Goals Become Reality. Step into a World of Expertise and Innovation, Where Dedicated Trainers, Cutting-Edge Equipment, and a Vibrant Community Await. Whether You're a Seasoned Athlete or Just Starting Out, Our Gym Provides the Perfect Environment to Challenge Yourself, Grow Stronger, and Achieve Success. Join Us Today and Embrace the Journey Towards a Healthier, Happier You."</p>
-        <div class="buttons">
-            <app-button>Reserve</app-button>
-            <app-button>Contact Us</app-button>
-        </div>
+            <h1 class="title">FlexFit</h1>
+            <p class="summary">"Welcome to Our Gym: Where Your Fitness Goals Become Reality. Step into a World of
+                Expertise and Innovation, Where Dedicated Trainers, Cutting-Edge Equipment, and a Vibrant Community
+                Await. Whether You're a Seasoned Athlete or Just Starting Out, Our Gym Provides the Perfect Environment
+                to Challenge Yourself, Grow Stronger, and Achieve Success. Join Us Today and Embrace the Journey Towards
+                a Healthier, Happier You."</p>
+            <div class="buttons">
+                <app-button>Prices</app-button>
+                <app-button>Contact Us</app-button>
+            </div>
         </div>
     </div>
+
+
 </div>
+<div class="explore container">
+    <div class="header">
+        <h1 class="title">Explore Our Program</h1>
+        <div class="slider-arrows">
+            <button #prev class="prev btn"><app-image [name]="'arrow.svg'" /></button>
+            <button #next class="next btn"><app-image [name]="'arrow.svg'" /></button>
+        </div>
+    </div>
+    <div class="blocks">
+        <ng-container class="blocks" *ngTemplateOutlet="blocks" />
+    </div>
+    <div class="slider">
+        <ng-container class="slider" *ngTemplateOutlet="slider" />
+    </div>
+
+</div>
+
+<ng-template #blocks>
+    @for(slide of exploreItems; track slide.id) {
+    <div class="explore-items">
+        <app-explore-item [icon]="slide.icon" [description]="slide.desc" [title]="slide.title" />
+    </div>
+    }
+</ng-template>
+
+<ng-template #slider>
+    <app-slider [slideConfig]="slideConfig">
+        @for(slide of exploreItems; track slide.id) {
+        <div ngxSlickItem class="slide">
+            <app-explore-item [icon]="slide.icon" [description]="slide.desc" [title]="slide.title" />
+        </div>
+        }
+    </app-slider>
+</ng-template>

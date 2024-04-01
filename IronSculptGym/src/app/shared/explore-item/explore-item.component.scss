@@ -1,0 +1,32 @@
+@import "../../../assets/colors/colors";
+@import "../../../assets/mixins/mixins";
+
+.explore {
+    width: 320px;
+    height: 220px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    background-color: $explore;
+    padding: 20px;
+    margin: auto;
+    @include mobileXL {
+        width: 240px;
+    }
+    @include mobile {
+        width: 100%;
+    }
+    .title {
+        color: $white;
+        font-size: 23px;
+        margin-top: 20px;
+    }
+    .summary {
+        color: $white;
+        text-align: justify;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+}

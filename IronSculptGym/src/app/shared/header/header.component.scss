@@ -1,0 +1,70 @@
+@import '../../../assets/colors/colors';
+@import '../../../assets/mixins/mixins';
+
+.header {
+    .navbar {
+        .navbar-toggler {
+            flex-direction: column;
+            height: 60px;
+            outline: none;
+            box-shadow: none;
+            .navbar-toggler-icons {
+                display: block;
+                height: 4px;
+                background-color: $gold;
+                color: $gold;
+                margin-top: 5px;
+                width: 50px;
+                border-radius: 3px;
+            }
+        }
+        .navbar-brand {
+            ::ng-deep {
+                .logo{
+                    height: 60px;
+                    width: 60px;
+                }
+            }
+        }
+        .collapse {
+            flex-direction: row-reverse;
+            .navbar-nav {
+                @include tablet{
+                    height: 100vh;
+                    align-items: center;
+
+                }
+                .nav-item {
+                    color: white;
+                    position: relative;
+                    font-size: 20px;
+                    margin-right: 30px;
+                    @include tablet{
+                        margin: 0;
+                        
+                    }
+                    &:last-child {
+                        margin-right: 0;
+                    }
+                    &:hover {
+                        .line {
+                            width: 100%;
+                        }
+                    }
+                    &.active {
+                        .line {
+                            width: 100%;
+                        }
+                    }
+                    .line {
+                        width: 0;
+                        background-color: $gold;
+                        display: block;
+                        height: 3px;
+                        transition: all .5s;
+                    }
+                }
+            }
+        }
+    }
+}

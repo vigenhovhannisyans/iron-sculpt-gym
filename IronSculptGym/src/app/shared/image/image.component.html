@@ -1,0 +1,5 @@
+@if (isIcon) {
+<img [className]="className" [src]="'../../../assets/images/icons/' + name" alt="">
+} @else {
+<img [class.className]="className" [src]="'../../../assets/images/image/' + name" alt="">
+}
